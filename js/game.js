@@ -80,7 +80,7 @@ Alien.prototype.step = function(dt) {
 
 //alien fire rate
 Alien.prototype.fireSometimes = function() {
-      if(Math.random()*100 < 30) {
+      if(Math.random()*100 < 50) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
                                       this.y + this.h, 
                                      { dy: 100 });
