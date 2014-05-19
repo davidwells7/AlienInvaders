@@ -1,4 +1,4 @@
-
+//level layout. 0=nothing
   var levelData = { 
      1:  [[0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,2,2,0,0,0,0],
@@ -29,6 +29,8 @@
     'player': { sx: 0,  sy: 36, w: 26, h: 17, cls: Player },
     'missile': { sx: 0,  sy: 86, w: 3,  h: 14, cls: Missile }
   }
+
+//game screens
 
   function startGame() {
     var screen = new GameScreen("Alien Invaders","press space to start",
