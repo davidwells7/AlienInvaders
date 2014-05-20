@@ -8,8 +8,7 @@ var AlienFlock = function AlienFlock() {
 
   this.draw = function() {};
 
-//loads next level
-
+    //loads next level
   this.die = function() {
     if(Game.board.nextLevel()) {
       Game.loadBoard(new GameBoard(Game.board.nextLevel())); 
@@ -59,7 +58,6 @@ Alien.prototype.draw = function(canvas) {
 
 Alien.prototype.die = function() {
   GameAudio.play('die');
-  //speed increase on alien death
   this.flock.speed += 1;
   this.board.remove(this);
 }
@@ -83,14 +81,13 @@ Alien.prototype.step = function(dt) {
 
 //alien fire rate
 Alien.prototype.fireSometimes = function() {
-      if(Math.random()*100 < 40) {
+      if(Math.random()*100 < 30) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
                                       this.y + this.h, 
                                      { dy: 100 });
       }
 }
 
-//reload speed
 var Player = function Player(opts) { 
   this.reloading = 0;
 }
@@ -119,19 +116,28 @@ Player.prototype.step = function(dt) {
 
   this.reloading--;
 //player firing rate
-  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 6) {
+  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 10) {
     GameAudio.play('fire');
     this.board.addSprite('missile',
                           this.x + this.w/2 - Sprites.map.missile.w/2,
                           this.y-this.h,
                           { dy: -100, player: true });
     this.board.missiles++;
-    this.reloading = 20;
+    this.reloading = 5;
+  }
+    if(Game.keys['fire2'] && this.reloading <= 0 && this.board.missiles < 2) {
+    GameAudio.play('fire');
+    this.board.addSprite('missile2',
+                          this.x + this.w/2 - Sprites.map.missile.w/2,
+                          this.y-this.h,
+                          { dy: -100, player: true });
+    this.board.missiles++;
+    this.reloading = 10;
   }
   return true;
 }
 
-//weapons
+
 var Missile = function Missile(opts) {
    this.dy = opts.dy;
    this.player = opts.player;

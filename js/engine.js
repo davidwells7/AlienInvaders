@@ -1,7 +1,8 @@
 //changes: Game speed
 
+//game controls
 var Game = new function() {                                                                  
-  var KEY_CODES = { 37:'left', 39:'right', 38:'up', 40:'down', 32 :'fire' };
+  var KEY_CODES = { 37:'left', 39:'right', 38:'up', 40:'down', 90 :'fire', 88 : 'fire2'};
   this.keys = {};
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
@@ -54,7 +55,7 @@ var GameScreen = function GameScreen(text,text2,callback) {
   this.step = function(dt) {
     if(Game.keys['fire'] && callback) callback();
   };
-
+    
   this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
     canvas.font = "bold 40px arial";
