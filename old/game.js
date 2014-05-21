@@ -125,7 +125,7 @@ Player.prototype.step = function(dt) {
     this.board.missiles++;
     this.reloading = 5;
   }
-    if(Game.keys['fire2'] && this.reloading <= 0 && this.board.missiles < 1) {
+    if(Game.keys['fire2'] && this.reloading <= 0 && this.board.missiles < 2) {
     GameAudio.play('fire');
     this.board.addSprite('missile2',
                           this.x + this.w/2 - Sprites.map.missile2.w/2,
@@ -176,14 +176,9 @@ Missile2.prototype.draw = function(canvas) {
 Missile2.prototype.step = function(dt) {
    this.y += this.dy * dt;
 
-var num = 0;    
-    
    var enemy = this.board.collide(this);
    if(enemy) { 
      enemy.die();
-       num+=1;
-   }
-       if(num>=2){
      return false;
    }
    return (this.y < 0 || this.y > Game.height) ? false : true;
