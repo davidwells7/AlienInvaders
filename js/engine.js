@@ -1,7 +1,9 @@
 //changes: Game speed
 
 //game controls
-var Game = new function() {                                                                  
+
+var Game = new function() {   
+    
   var KEY_CODES = { 37:'left', 39:'right', 38:'up', 40:'down', 90 :'fire', 88 : 'fire2'};
   this.keys = {};
 
