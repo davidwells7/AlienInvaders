@@ -131,7 +131,7 @@ Player.prototype.step = function(dt) {
                           this.y-this.h,
                           { dy: -100, player: true });
     this.board.missiles++;
-    this.reloading = 10;
+    this.reloading = 15;
   }
     if(Game.keys['fire2'] && this.reloading <= 0 && this.board.missiles < 2 && ammo>0) {
     GameAudio.play('fire');
