@@ -12,6 +12,8 @@ var score =1000;
 
 var powerUp = 0;
 
+var score = 0;
+
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -78,6 +80,7 @@ Alien.prototype.die = function() {
   this.board.remove(this);
   power.value = power.value+=1;
   powerUp++;
+  score++;
 }
 
 Alien.prototype.step = function(dt) {
