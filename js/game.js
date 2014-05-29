@@ -23,7 +23,9 @@ var AlienFlock = function AlienFlock() {
     if(Game.board.nextLevel()) {
       Game.loadBoard(new GameBoard(Game.board.nextLevel())); 
         ammo=3;
+		life=3;
 		shots.value = 90;
+		health.value = 90;
     } else {
       Game.callbacks['win']();
     }
@@ -72,7 +74,7 @@ Alien.prototype.die = function() {
   GameAudio.play('die');
   this.flock.speed += 1;
   this.board.remove(this);
-  score.value = score.value+10;
+  power.value = power.value+=1;
 }
 
 Alien.prototype.step = function(dt) {
@@ -115,13 +117,15 @@ Player.prototype.die = function() {
   life--;
   console.log(life);
 health.value = health.value-=30;
+power.value = power.value-=10;
 this.board.score--;
 	if(life==0){
   Game.callbacks['die']();
     ammo=3;
 	life=3;
 	shots.value = 90;
-	health.value = health.value=100;
+	health.value = 90;
+	power.value = 0;
 	}
 }
 
@@ -134,7 +138,7 @@ Player.prototype.step = function(dt) {
     playerX=this.x;
   if(this.x < 0) this.x = 0;
   if(this.x > Game.width-this.w) this.x = Game.width-this.w;
-  if(this.y > 484) this.y = 484;
+  if(this.y > 475) this.y = 475;
   if(this.y < 300) this.y = 300;
 
   this.reloading--;

@@ -18,28 +18,60 @@
 </head>
 <body>
   <div id='game-wrapper'>
-	  <font face="impact" size="4" color="red">Health</font>
+	 <div id='ui'>
+	  <font face="silom" size="3" color="#f83800">Health</font>
 	  <progress id="health" value="90" max="90"></progress>
-	  <font size="4" color="blue">Ammo</font>
+	  <font face="silom" size="3" color="#3cbcfc">Ammo</font>
 	  <progress id="shots" value="90" max="90"></progress>
+	  <font face="silom" size="3" color="#58d854">Power</font>
+	  <progress id="power" value="0" max="20"></progress>
+	 </div>
 	<style>
+		#ui{
+			background-color:#111;
+		}
 		progress {  
-			background-color:#CCC;
-			width:180px;
+			background-color:#111;
+			width:103px;
+	
 }  
- 
+ #health::-webkit-progress-bar {  
+	border-radius:10px;
+}  
+		
 #health::-webkit-progress-value {  
-    background-color:red;
+    background-color:#f83800;
+	border-radius:10px;
 }  
 #health::-moz-progress-bar {  
-	background-color:red;
+	background-color:#f83800;
+	border-radius:10px;
+}  
+		
+#shots::-webkit-progress-bar {  
+	border-radius:10px;
 }  
 		
 #shots::-webkit-progress-value {  
-    background-color:blue;
+    background-color:#3cbcfc;
+	border-radius:10px;
 }  
 #shots::-moz-progress-bar {  
-			background-color:blue;
+	background-color:#3cbcfc;
+	border-radius:10px;
+}  
+		
+#power::-webkit-progress-bar {  
+	border-radius:10px;
+}  
+		
+#power::-webkit-progress-value {  
+    background-color:#58d854;
+	border-radius:10px;
+}  
+#power::-moz-progress-bar {  
+	background-color:#58d854;
+	border-radius:10px;
 }  
 	  </style>
 	  <div id="score" value"0"></div>

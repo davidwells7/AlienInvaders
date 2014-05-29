@@ -1,4 +1,8 @@
+/*what else to add:
+	Power up: Shield or huge laser.
+	Boss: Larger enemy with health and faster firing rate.
 
+*/
   var levelData = { 
      1:  [[0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
