@@ -6,6 +6,10 @@ var ammo = 3;
 
 var playerX;
 
+var life = 3;
+
+var score =1000;
+
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -19,6 +23,7 @@ var AlienFlock = function AlienFlock() {
     if(Game.board.nextLevel()) {
       Game.loadBoard(new GameBoard(Game.board.nextLevel())); 
         ammo=3;
+		shots.value = 90;
     } else {
       Game.callbacks['win']();
     }
@@ -67,6 +72,7 @@ Alien.prototype.die = function() {
   GameAudio.play('die');
   this.flock.speed += 1;
   this.board.remove(this);
+  score.value = score.value+10;
 }
 
 Alien.prototype.step = function(dt) {
@@ -88,7 +94,7 @@ Alien.prototype.step = function(dt) {
 
 //alien fire rate
 Alien.prototype.fireSometimes = function() {
-      if(Math.random()*100 < 10) {
+      if(Math.random()*100 < 20) {
         this.board.addSprite('missile3',this.x + this.w/2 - Sprites.map.missile3.w/2,
                                       this.y + this.h,
                                      { dy: 100 });
@@ -106,8 +112,17 @@ Player.prototype.draw = function(canvas) {
 
 Player.prototype.die = function() {
   GameAudio.play('die');
+  life--;
+  console.log(life);
+health.value = health.value-=30;
+this.board.score--;
+	if(life==0){
   Game.callbacks['die']();
     ammo=3;
+	life=3;
+	shots.value = 90;
+	health.value = health.value=100;
+	}
 }
 
 //movement
@@ -141,6 +156,7 @@ Player.prototype.step = function(dt) {
                           { dy: -100, player: true });
     this.board.missiles++;
     ammo--;
+	shots.value = shots.value-=30;
     this.reloading = 30;
     console.log(ammo);
   }

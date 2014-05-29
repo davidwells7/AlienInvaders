@@ -43,7 +43,7 @@
     'missile2': { sx: 12,  sy: 86, w: 18,  h: 14, cls: Missile2 },
     'missile3': { sx: 0,  sy: 86, w: 3,  h: 14, cls: Missile3 }
   }
-
+  
   function startGame() {
     var screen = new GameScreen("Alien Invaders","Press Z!",
                                  function() {

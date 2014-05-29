@@ -11,10 +11,38 @@
   <style>
       #gameboard { background-image:url('images/stars.gif'); background-repeat:repeat; }
       #game-wrapper { margin:0 auto; width: 500px; }
+	  p1{
+		  font-family:serif;
+	  }
   </style>
 </head>
 <body>
   <div id='game-wrapper'>
+	  <font face="impact" size="4" color="red">Health</font>
+	  <progress id="health" value="90" max="90"></progress>
+	  <font size="4" color="blue">Ammo</font>
+	  <progress id="shots" value="90" max="90"></progress>
+	<style>
+		progress {  
+			background-color:#CCC;
+			width:180px;
+}  
+ 
+#health::-webkit-progress-value {  
+    background-color:red;
+}  
+#health::-moz-progress-bar {  
+	background-color:red;
+}  
+		
+#shots::-webkit-progress-value {  
+    background-color:blue;
+}  
+#shots::-moz-progress-bar {  
+			background-color:blue;
+}  
+	  </style>
+	  <div id="score" value"0"></div>
     <canvas id='gameboard' width='500' height='500'></canvas>
   </div>
 </body>
