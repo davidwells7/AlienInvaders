@@ -14,6 +14,10 @@ var highScore =0;
 
 var powerUp = 0;
 
+var bossHealth = 10;
+
+var bossHit = 0;
+
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -108,6 +112,58 @@ Alien.prototype.step = function(dt) {
 Alien.prototype.fireSometimes = function() {
       if(Math.random()*100 < 20) {
         this.board.addSprite('missile3',this.x + this.w/2 - Sprites.map.missile3.w/2,
+                                      this.y + this.h,
+                                     { dy: 100 });
+      }
+}
+
+var Alien2 = function Alien2(opts) {
+  this.flock = opts['flock'];
+  this.frame = 0;
+  this.mx = 4;
+}
+
+Alien2.prototype.draw = function(canvas) {
+  Sprites.draw(canvas,this.name,this.x,this.y,this.frame);
+}
+
+Alien2.prototype.die = function() {
+  GameAudio.play('wow');
+  bossHealth--;
+  bossHit=1;
+  if(bossHealth==0){
+  this.board.remove(this);
+  }
+  power.value = power.value+=1;
+  powerUp++;
+   if(score==highScore){
+  highScore++;
+  }
+  score++;
+ 
+}
+
+Alien2.prototype.step = function(dt) {
+  this.mx += dt * this.flock.dx;
+  this.y += this.flock.dy;
+  if(Math.abs(this.mx) > 10) {
+    if(this.y == this.flock.max_y[this.x]) {
+      this.fireSometimes();
+    }
+//changes the number of frames for sprite animation
+    this.x += this.mx;
+    this.mx = 0;
+    this.frame = (this.frame+1) % 1;
+    if(this.x > Game.width - Sprites.map.alien1.w * 2) this.flock.hit = -1;
+    if(this.x < Sprites.map.alien1.w) this.flock.hit = 1;
+  }
+  return true;
+}
+
+//alien fire rate
+Alien2.prototype.fireSometimes = function() {
+      if(Math.random()*100 < 50) {
+        this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile3.w/2,
                                       this.y + this.h,
                                      { dy: 100 });
       }
@@ -227,6 +283,12 @@ Missile2.prototype.step = function(dt) {
    var enemy = this.board.collide(this);
    if(enemy) { 
      enemy.die();
+	
+	 if(bossHit==1){
+	 this.board.remove(this);
+	 bossHit=0;
+	 }
+	  return false;
      /* num++;
    }
      if(num>=3){
@@ -239,7 +301,7 @@ Missile2.prototype.step = function(dt) {
 Missile2.prototype.die = function() {
   if(this.player) this.board.missiles--;
   if(this.board.missiles < 0) this.board.missiles=0;
-   //this.board.remove(this);
+   
 }
 
 var Missile3 = function Missile3(opts) {

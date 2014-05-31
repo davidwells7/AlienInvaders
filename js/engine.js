@@ -39,11 +39,12 @@ var Game = new function() {
 var Sprites = new function() {
   this.map = { }; 
 
+  //loads spritesheet
   this.load = function(sprite_data,callback) { 
     this.map = sprite_data;
     this.image = new Image();
     this.image.onload = callback;
-    this.image.src = 'images/sprites.png';
+    this.image.src = 'images/spritesnew.png';
   };
 
   this.draw = function(canvas,sprite,x,y,frame) {
@@ -143,7 +144,7 @@ var GameBoard = function GameBoard(level_number) {
     this.player = this.addSprite('player', // Sprite
                                  Game.width/2, // X
                                  Game.height - Sprites.map['player'].h - 10); // Y
-
+								 
     var flock = this.add(new AlienFlock());
     for(var y=0,rows=level.length;y<rows;y++) {
       for(var x=0,cols=level[y].length;x<cols;x++) {

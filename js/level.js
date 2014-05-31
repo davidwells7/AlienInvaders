@@ -4,7 +4,7 @@
 
 */
   var levelData = { 
-     1:  [[0,0,0,0,0,0,0,0,0,0,0],
+     1:  [[0,0,3,0,3,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
@@ -42,7 +42,8 @@
   var spriteData = {
     'alien1': { sx: 0,  sy: 0,  w: 24, h: 18, cls: Alien, frames: 3 },
     'alien2': { sx: 0,  sy: 18, w: 24, h: 18, cls: Alien, frames: 3 },
-    'player': { sx: 0,  sy: 36, w: 26, h: 17, cls: Player, frames: 2 },
+	'alien3': { sx: 0,  sy: 54, w: 44, h: 32, cls: Alien2, frames: 1},
+    'player': { sx: 0,  sy: 36, w: 26, h: 17, cls: Player, },
     'missile': { sx: 4,  sy: 86, w: 3,  h: 14, cls: Missile },
     'missile2': { sx: 12,  sy: 86, w: 18,  h: 14, cls: Missile2 },
     'missile3': { sx: 0,  sy: 86, w: 3,  h: 14, cls: Missile3 }
