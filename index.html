@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Alien Invaders</title>
@@ -31,8 +32,15 @@
             function refreshDiv(){   
                 document.getElementById("score").innerHTML = "Score " + score;  
             }  
+			            window.setInterval("refreshDick()", 100);  
+            function refreshDick(){   
+                document.getElementById("highScore").innerHTML = "High Score " + highScore;  
+            }  
         </script> 
 		<font face="Arial" size="4" color="#FFF"><div id="score"></div></font>
+		  
+
+		<font face="Arial" size="4" color="#CCC"><div id="highScore"></div></font>
 	 </div>
 	<style>
 

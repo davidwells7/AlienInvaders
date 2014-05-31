@@ -48,6 +48,7 @@
     'missile3': { sx: 0,  sy: 86, w: 3,  h: 14, cls: Missile3 }
   }
   
+
   function startGame() {
     var screen = new GameScreen("Alien Invaders","Press Z!",
                                  function() {
@@ -75,7 +76,7 @@
   }
 
   $(function() {
-    GameAudio.load({ 'fire' : 'media/laser.ogg', 'die' : 'media/SmallExplosion8Bit.ogg' }, 
+    GameAudio.load({ 'fire' : 'media/laser.ogg', 'die' : 'media/SmallExplosion8Bit.ogg', 'wow' : 'media/bitch.wav'}, 
                    function() { 
                        Game.initialize("#gameboard", levelData, spriteData,
                                       { "start": startGame,

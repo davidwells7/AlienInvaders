@@ -8,11 +8,11 @@ var playerX;
 
 var life = 3;
 
-var score =1000;
+var score =0;
+
+var highScore =0;
 
 var powerUp = 0;
-
-var score = 0;
 
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
@@ -80,7 +80,11 @@ Alien.prototype.die = function() {
   this.board.remove(this);
   power.value = power.value+=1;
   powerUp++;
+   if(score==highScore){
+  highScore++;
+  }
   score++;
+ 
 }
 
 Alien.prototype.step = function(dt) {
@@ -111,6 +115,11 @@ Alien.prototype.fireSometimes = function() {
 
 var Player = function Player(opts) { 
   this.reloading = 0;
+  this.backgroundAudio = new Audio("media/Corneria.mp3");
+  this.backgroundAudio.loop = true;
+  this.backgroundAudio.volume = .25;
+  this.backgroundAudio.load();
+  this.backgroundAudio.play();
 }
 
 Player.prototype.draw = function(canvas) {
@@ -132,6 +141,8 @@ this.board.score--;
 	shots.value = 90;
 	health.value = 90;
 	power.value = 0;
+	score = 0;
+	this.backgroundAudio.pause();
 	}
 }
 
