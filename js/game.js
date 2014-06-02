@@ -18,6 +18,13 @@ var bossHealth = 10;
 
 var bossHit = 0;
 
+var gamePlay = 0;
+
+var level = 0;
+
+var Music = new Audio('media/Corneria.mp3');
+var Music2 = new Audio('media/corneria-boss.mp3');
+
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -171,17 +178,19 @@ Alien2.prototype.fireSometimes = function() {
 
 var Player = function Player(opts) { 
   this.reloading = 0;
-  this.backgroundAudio = new Audio("media/Corneria.mp3");
-  this.backgroundAudio.loop = true;
-  this.backgroundAudio.volume = .25;
-  this.backgroundAudio.load();
-  this.backgroundAudio.play();
+  gamePlay=1;
+  level++;
+  if(level<=2){
+  Music.play();
+  }else{
+  Music.pause();
+  Music2.play();
+  }
 }
 
 Player.prototype.draw = function(canvas) {
    Sprites.draw(canvas,'player',this.x,this.y);
-}
-
+   }
 
 Player.prototype.die = function() {
   GameAudio.play('die');
@@ -198,7 +207,9 @@ this.board.score--;
 	health.value = 90;
 	power.value = 0;
 	score = 0;
-	this.backgroundAudio.pause();
+	Music.pause();
+	Music2.pause();
+	level=0;
 	}
 }
 
@@ -336,4 +347,3 @@ Missile3.prototype.die = function() {
   if(this.board.missiles < 0) this.board.missiles=0;
    this.board.remove(this);
 }
-

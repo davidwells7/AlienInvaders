@@ -47,6 +47,7 @@ var Sprites = new function() {
     this.image.src = 'images/spritesnew.png';
   };
 
+  
   this.draw = function(canvas,sprite,x,y,frame) {
     var s = this.map[sprite];
     if(!frame) frame = 0;
@@ -68,6 +69,7 @@ var GameScreen = function GameScreen(text,text2,callback) {
     canvas.font = "bold 20px futura";
     var measure2 = canvas.measureText(text2);
     canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 40);
+	
       // canvas.fillText(this.state,20,Game.height-20);
 	  
 /*	canvas.font = "bold 30px arial";
