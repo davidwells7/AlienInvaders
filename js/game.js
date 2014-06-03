@@ -2,29 +2,31 @@
 
 //var num=1;
 
+/*Some variables for the player. Ammo is for the secondary fire, playerX is for calculating homing missiles.
+Life is the number of hits the player can take, and powerUp is a meter that when fill, immediately makes the player
+invulnerable for a short time.*/
 var ammo = 3;
-
 var playerX;
-
 var life = 3;
+var powerUp = 0;
+var powerSwitch = 0;
 
+//player score
 var score =0;
-
 var highScore =0;
 
-var powerUp = 0;
-
+//health calculation for boss enemy
 var bossHealth = 10;
-
 var bossHit = 0;
 
+//these variables are for the game to decide what music to play.
 var gamePlay = 0;
-
 var level = 0;
-
 var Music = new Audio('media/Corneria.mp3');
 var Music2 = new Audio('media/corneria-boss.mp3');
 
+
+//alien flock setup
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -43,6 +45,8 @@ var AlienFlock = function AlienFlock() {
 		health.value = 90;
     } else {
       Game.callbacks['win']();
+	  Music.pause();
+	  Music2.pause();
     }
   }
 
@@ -74,7 +78,7 @@ var AlienFlock = function AlienFlock() {
 }
 
 
-
+//First 2 aliens.
 var Alien = function Alien(opts) {
   this.flock = opts['flock'];
   this.frame = 0;
@@ -98,9 +102,16 @@ Alien.prototype.die = function() {
  
 }
 
+//makes alien move left to right and down. Added code so you lose when it reaches the bottom.
 Alien.prototype.step = function(dt) {
   this.mx += dt * this.flock.dx;
   this.y += this.flock.dy;
+  if(this.y>=520){
+  Game.callbacks['die']();
+  life=3;
+  ammo=3;
+  score=0;
+  }
   if(Math.abs(this.mx) > 10) {
     if(this.y == this.flock.max_y[this.x]) {
       this.fireSometimes();
@@ -124,6 +135,9 @@ Alien.prototype.fireSometimes = function() {
       }
 }
 
+/*Alien2 is the big green alien. It takes more hits than the standard alien
+but doesn't need to be killed to get to the next level. This means you have
+to shoot them first if you want a high score!*/
 var Alien2 = function Alien2(opts) {
   this.flock = opts['flock'];
   this.frame = 0;
@@ -140,6 +154,8 @@ Alien2.prototype.die = function() {
   bossHit=1;
   if(bossHealth==0){
   this.board.remove(this);
+  bossHealth=10;
+  
   }
   power.value = power.value+=1;
   powerUp++;
@@ -160,7 +176,7 @@ Alien2.prototype.step = function(dt) {
 //changes the number of frames for sprite animation
     this.x += this.mx;
     this.mx = 0;
-    this.frame = (this.frame+1) % 1;
+    this.frame = (this.frame+1) % 2;
     if(this.x > Game.width - Sprites.map.alien1.w * 2) this.flock.hit = -1;
     if(this.x < Sprites.map.alien1.w) this.flock.hit = 1;
   }
@@ -176,10 +192,12 @@ Alien2.prototype.fireSometimes = function() {
       }
 }
 
+//I put the music play controls in here as it runs once when each level loads.
 var Player = function Player(opts) { 
   this.reloading = 0;
   gamePlay=1;
   level++;
+  this.frame = 0;
   if(level<=2){
   Music.play();
   }else{
@@ -189,10 +207,12 @@ var Player = function Player(opts) {
 }
 
 Player.prototype.draw = function(canvas) {
-   Sprites.draw(canvas,'player',this.x,this.y);
+   Sprites.draw(canvas,'player',this.x,this.y,this.frame);
+   console.log(powerUp);
    }
 
 Player.prototype.die = function() {
+if(powerSwitch!=1){
   GameAudio.play('die');
   life--;
   console.log(life);
@@ -201,6 +221,7 @@ power.value = power.value-=10;
 this.board.score--;
 	if(life==0){
   Game.callbacks['die']();
+  //resets stats to default
     ammo=3;
 	life=3;
 	shots.value = 90;
@@ -211,6 +232,7 @@ this.board.score--;
 	Music2.pause();
 	level=0;
 	}
+}
 }
 
 //movement
@@ -225,6 +247,21 @@ Player.prototype.step = function(dt) {
   if(this.y > 475) this.y = 475;
   if(this.y < 300) this.y = 300;
 
+  if(powerUp==20){
+  this.frame = (this.frame+1) % 2;
+  powerSwitch=1;
+  }
+  
+  if(powerSwitch==1){
+  powerUp-=0.1;
+  power.value-=0.1;
+  if(powerUp<=0){
+  powerUp=0;
+  this.frame = (this.frame+1) % 2;
+  powerSwitch=0;
+   }
+  }
+  
   this.reloading--;
 //player firing rate
   if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 5) {
@@ -251,7 +288,7 @@ Player.prototype.step = function(dt) {
   return true;
 }
 
-
+//Player missile.
 var Missile = function Missile(opts) {
    this.dy = opts.dy;
    this.player = opts.player;
@@ -279,6 +316,7 @@ Missile.prototype.die = function() {
    this.board.remove(this);
 }
 
+//Secondary player missile. Goes through most objects, but has limited ammo.
 var Missile2 = function Missile2(opts) {
    this.dy = opts.dy;
    this.player = opts.player;
@@ -320,6 +358,7 @@ var Missile3 = function Missile3(opts) {
    this.player = opts.player;
 }
 
+//enemy missile. Homes in on the player.
 Missile3.prototype.draw = function(canvas) {
    Sprites.draw(canvas,'missile3',this.x,this.y);
 }

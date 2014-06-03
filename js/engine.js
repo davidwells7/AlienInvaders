@@ -4,6 +4,7 @@
 
 var Game = new function() { 
     
+	//controls. I added up and down controls and made fire z and x.
   var KEY_CODES = { 37:'left', 39:'right', 38:'up', 40:'down', 90 :'fire', 88 : 'fire2'};
   this.keys = {};
 
@@ -44,7 +45,7 @@ var Sprites = new function() {
     this.map = sprite_data;
     this.image = new Image();
     this.image.onload = callback;
-    this.image.src = 'images/spritesnew.png';
+    this.image.src = 'images/sprites1.png';
   };
 
   
@@ -62,11 +63,11 @@ var GameScreen = function GameScreen(text,text2,callback) {
     
   this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
-    canvas.font = "bold 40px futura";
+    canvas.font = "bold 40px Arial";
     var measure = canvas.measureText(text);  
     canvas.fillStyle = "#FFFFFF";
     canvas.fillText(text,Game.width/2 - measure.width/2,Game.height/2);
-    canvas.font = "bold 20px futura";
+    canvas.font = "bold 20px Arial";
     var measure2 = canvas.measureText(text2);
     canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 40);
 	
@@ -80,6 +81,7 @@ var GameScreen = function GameScreen(text,text2,callback) {
   };
 };
 
+//Loads gameboard for each level.
 var GameBoard = function GameBoard(level_number) {
   this.removed_objs = [];
   this.missiles = 0;
@@ -140,7 +142,7 @@ var GameBoard = function GameBoard(level_number) {
        return board.collision(obj,this) ? this : false;
     });
   };
-
+//loads each level's sprite locations
   this.loadLevel = function(level) {
     this.objects = [];
     this.player = this.addSprite('player', // Sprite

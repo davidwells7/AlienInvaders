@@ -1,4 +1,27 @@
-A Simple HTML5 Game To-be used in a Tutorial
+This is a game made from a basic version of Space Invaders made in JavaScript.
 
-Slides up at:
-http://www.slideshare.net/cykod/html5-game-development-introduction-5815787
+Instructions:
+
+Controls:
+Arrow Keys = Move
+Z = Primary fire
+X = Secondary fire
+
+In this game your aim is to clear all 3 stages of aliens, and try to make a high score in the process.
+You have two types of missile at your disposal, a standard missile and a power shot that penetrates
+enemies, but has limited ammo.
+
+The enemies missiles in this game home in on you, plus you don't get barriers like in the original.
+However, special attacks and an invincibility power-up help to keep it balanced, yet give a different
+experience to the original Space Invaders
+
+Tips:
+
+Fill your Power bar in order to become temporarily invincible. Time your last shot, as the effect is immediate!
+
+There are three types of aliens in the game. The big green ones take a lot of hits, but are not vital to clearing
+the level. Kill them if you want to aim for a high score!
+
+
+The music in this game is from the SNES game Star Fox, copyrighted by Nintendo. The sound effects are free sounds
+found online. All sprites excluding the background were made by me.
