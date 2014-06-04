@@ -46,6 +46,9 @@ var Sprites = new function() {
     this.image = new Image();
     this.image.onload = callback;
     this.image.src = 'images/sprites1.png';
+	this.webkitImageSmoothingEnabled = false;
+	this.mozImageSmoothingEnabled = false;
+	this.imageSmoothingEnabled = false;
   };
 
   

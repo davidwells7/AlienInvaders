@@ -82,7 +82,7 @@ var AlienFlock = function AlienFlock() {
 var Alien = function Alien(opts) {
   this.flock = opts['flock'];
   this.frame = 0;
-  this.mx = 0;
+  this.mx = 1;
 }
 
 Alien.prototype.draw = function(canvas) {
@@ -208,7 +208,6 @@ var Player = function Player(opts) {
 
 Player.prototype.draw = function(canvas) {
    Sprites.draw(canvas,'player',this.x,this.y,this.frame);
-   console.log(powerUp);
    }
 
 Player.prototype.die = function() {
